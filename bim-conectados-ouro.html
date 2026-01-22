@@ -895,14 +895,36 @@
 
     <input type="file" id="importFile" accept=".json" style="display: none;" onchange="handleImport(event)">
 
+    <!-- Firebase App (modular CDN) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
     <script>
-        let profiles = JSON.parse(localStorage.getItem('bimConectadosProfiles')) || [];
+        // Configuração do Firebase do seu projeto
+        const firebaseConfig = {
+            apiKey: "AIzaSyBEnQ1WjeK1tG6kd6aw7Sev6qLmb2--E",
+            authDomain: "bim-conectados-ouro.firebaseapp.com",
+            databaseURL: "https://bim-conectados-ouro-default-rtdb.firebaseio.com",
+            projectId: "bim-conectados-ouro",
+            storageBucket: "bim-conectados-ouro.appspot.com",
+            messagingSenderId: "1079293409808",
+            appId: "1:1079293409808:web:f3aae3e7c6c98f8d2d8a95",
+            measurementId: "G-54HSRFZGB6"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        let profiles = [];
         let currentView = localStorage.getItem('bimConectadosView') || 'grid';
 
+
         document.addEventListener('DOMContentLoaded', () => {
-            renderProfiles();
+            // Carrega perfis do Firebase
+            db.ref('profiles').on('value', (snapshot) => {
+                const data = snapshot.val();
+                profiles = data ? Object.values(data).sort((a, b) => b.id - a.id) : [];
+                renderProfiles();
+            });
             setView(currentView);
-            
             document.querySelectorAll('input').forEach(input => {
                 input.addEventListener('keypress', (e) => {
                     if (e.key === 'Enter') addProfile();
@@ -910,8 +932,20 @@
             });
         });
 
-        function saveProfiles() {
-            localStorage.setItem('bimConectadosProfiles', JSON.stringify(profiles));
+
+        // Salva um perfil individual no Firebase
+        function saveProfileToFirebase(profile) {
+            db.ref('profiles/' + profile.id).set(profile);
+        }
+
+        // Remove um perfil do Firebase
+        function deleteProfileFromFirebase(id) {
+            db.ref('profiles/' + id).remove();
+        }
+
+        // Limpa todos os perfis do Firebase
+        function clearAllProfilesFromFirebase() {
+            db.ref('profiles').remove();
         }
 
         function setView(view) {
@@ -933,6 +967,7 @@
             renderProfiles();
         }
 
+
         function addProfile() {
             const name = document.getElementById('profileName').value.trim();
             const linkedin = document.getElementById('linkedinUrl').value.trim();
@@ -942,17 +977,14 @@
                 showToast('Digite o nome do membro', true);
                 return;
             }
-
             if (!linkedin && !instagram) {
                 showToast('Adicione pelo menos um link de rede social', true);
                 return;
             }
-
             if (linkedin && !isValidLinkedIn(linkedin)) {
                 showToast('Link do LinkedIn inválido', true);
                 return;
             }
-
             if (instagram && !isValidInstagram(instagram)) {
                 showToast('Link do Instagram inválido', true);
                 return;
@@ -964,16 +996,12 @@
                 linkedin: linkedin || null,
                 instagram: instagram || null
             };
-
-            profiles.unshift(profile);
-            saveProfiles();
-            renderProfiles();
+            saveProfileToFirebase(profile);
 
             document.getElementById('profileName').value = '';
             document.getElementById('linkedinUrl').value = '';
             document.getElementById('instagramUrl').value = '';
             document.getElementById('profileName').focus();
-
             showToast('Membro adicionado com sucesso!');
         }
 
@@ -989,10 +1017,9 @@
             return name.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
         }
 
+
         function deleteProfile(id) {
-            profiles = profiles.filter(p => p.id !== id);
-            saveProfiles();
-            renderProfiles();
+            deleteProfileFromFirebase(id);
             showToast('Membro removido');
         }
 
@@ -1108,7 +1135,9 @@
             setTimeout(() => toast.classList.remove('show'), 2500);
         }
 
+
         function exportProfiles() {
+            // Exporta a lista atual (já sincronizada do Firebase)
             const dataStr = JSON.stringify(profiles, null, 2);
             const blob = new Blob([dataStr], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
@@ -1124,18 +1153,20 @@
             document.getElementById('importFile').click();
         }
 
+
         function handleImport(event) {
             const file = event.target.files[0];
             if (!file) return;
-
             const reader = new FileReader();
             reader.onload = (e) => {
                 try {
                     const imported = JSON.parse(e.target.result);
                     if (Array.isArray(imported)) {
-                        profiles = [...imported, ...profiles];
-                        saveProfiles();
-                        renderProfiles();
+                        imported.forEach(profile => {
+                            if (profile && profile.id && profile.name) {
+                                saveProfileToFirebase(profile);
+                            }
+                        });
                         showToast(`${imported.length} membros importados!`);
                     }
                 } catch (err) {
@@ -1148,9 +1179,7 @@
 
         function clearAllProfiles() {
             if (confirm('Tem certeza que deseja remover todos os membros?')) {
-                profiles = [];
-                saveProfiles();
-                renderProfiles();
+                clearAllProfilesFromFirebase();
                 showToast('Todos os membros removidos');
             }
         }
