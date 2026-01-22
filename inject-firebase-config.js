@@ -33,8 +33,12 @@ function injectFirebaseConfig() {
   htmlContent = htmlContent.replace(/__FIREBASE_APP_ID__/g, appId || '');
   htmlContent = htmlContent.replace(/__FIREBASE_MEASUREMENT_ID__/g, measurementId || '');
 
-  fs.writeFileSync(htmlPath, htmlContent);
-  console.log('✅ Firebase config injetada com sucesso no HTML');
+  // Escrever arquivo final em public/index.html para o Vercel servir como output
+  const outDir = path.join(__dirname, 'public');
+  if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+  const outPath = path.join(outDir, 'index.html');
+  fs.writeFileSync(outPath, htmlContent);
+  console.log('✅ Firebase config injetada com sucesso em', outPath);
 }
 
 if (require.main === module) {
