@@ -898,19 +898,15 @@
     <!-- Firebase App (modular CDN) -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <!-- Carregue sua configuração do Firebase em um arquivo separado NÃO versionado chamado firebaseConfig.js -->
+    <script src="firebaseConfig.js"></script>
     <script>
-        // Configuração do Firebase do seu projeto
-        const firebaseConfig = {
-            apiKey: "AIzaSyBEnQ1WjeK1tG6kd6aw7Sev6qLmb2--E",
-            authDomain: "bim-conectados-ouro.firebaseapp.com",
-            databaseURL: "https://bim-conectados-ouro-default-rtdb.firebaseio.com",
-            projectId: "bim-conectados-ouro",
-            storageBucket: "bim-conectados-ouro.appspot.com",
-            messagingSenderId: "1079293409808",
-            appId: "1:1079293409808:web:f3aae3e7c6c98f8d2d8a95",
-            measurementId: "G-54HSRFZGB6"
-        };
-        firebase.initializeApp(firebaseConfig);
+        // firebaseConfig deve ser definido em firebaseConfig.js (NÃO suba esse arquivo para o GitHub)
+        if (typeof firebaseConfig === 'undefined') {
+            alert('Crie um arquivo firebaseConfig.js com sua configuração do Firebase! Veja o README.');
+        } else {
+            firebase.initializeApp(firebaseConfig);
+        }
         const db = firebase.database();
 
         let profiles = [];
