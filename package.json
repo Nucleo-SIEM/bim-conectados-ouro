@@ -1,0 +1,14 @@
+{
+  "name": "bim-conectados-ouro",
+  "version": "1.0.0",
+  "description": "Diretório de membros BIM Conectados Ouro",
+  "scripts": {
+    "build": "node inject-firebase-config.js",
+    "dev": "python -m http.server 8000"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

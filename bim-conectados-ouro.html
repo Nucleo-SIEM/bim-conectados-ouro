@@ -901,16 +901,26 @@
     <!-- Firebase App (modular CDN) -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-    <!-- Carregue sua configuração do Firebase em um arquivo separado NÃO versionado chamado firebaseConfig.js -->
-    <script src="firebaseConfig.js"></script>
+    <!-- Firebase config será injetado pelo Vercel durante o build -->
     <script>
-        // firebaseConfig deve ser definido em firebaseConfig.js (NÃO suba esse arquivo para o GitHub)
-        if (typeof firebaseConfig === 'undefined') {
-            alert('Crie um arquivo firebaseConfig.js com sua configuração do Firebase! Veja o README.');
+        // FIREBASE_CONFIG_PLACEHOLDER - será substituído durante o build
+        const firebaseConfig = {
+            apiKey: "__FIREBASE_API_KEY__",
+            authDomain: "__FIREBASE_AUTH_DOMAIN__",
+            databaseURL: "__FIREBASE_DATABASE_URL__",
+            projectId: "__FIREBASE_PROJECT_ID__",
+            storageBucket: "__FIREBASE_STORAGE_BUCKET__",
+            messagingSenderId: "__FIREBASE_MESSAGING_SENDER_ID__",
+            appId: "__FIREBASE_APP_ID__",
+            measurementId: "__FIREBASE_MEASUREMENT_ID__"
+        };
+
+        if (typeof firebaseConfig.apiKey === 'undefined' || firebaseConfig.apiKey === '__FIREBASE_API_KEY__') {
+            alert('Firebase não configurado. Configure as variáveis de ambiente no Vercel.');
         } else {
             firebase.initializeApp(firebaseConfig);
         }
-        const db = firebase.database();
+    </script>
 
         let profiles = [];
         let currentView = localStorage.getItem('bimConectadosView') || 'grid';
