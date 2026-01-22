@@ -1,9 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "node inject-firebase-config.js",
+  "buildCommand": "npm install && npm run build",
   "installCommand": "npm install",
-  "outputDirectory": "public",
-  "build": {
-    "env": {}
-  }
+  "outputDirectory": "public"
 }
