@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIM Conectados Ouro | Conexão BIM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0c1117;
+            --bg-secondary: #141c26;
+            --bg-card: #1a242f;
+            --bg-card-hover: #212d3b;
+            --text-primary: #f5f5f5;
+            --text-secondary: #8b99a8;
+            --gold: #d4a853;
+            --gold-light: #e8c97a;
+            --gold-dark: #b8923f;
+            --linkedin: #0077b5;
+            --instagram: #e4405f;
+            --border: #2a3642;
+            --success: #22c55e;
+            --accent-blue: #3b82f6;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            padding: 2rem 1.5rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 0%, rgba(212, 168, 83, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(212, 168, 83, 0.3);
+        }
+
+        .logo-icon svg {
+            width: 28px;
+            height: 28px;
+            color: var(--bg-primary);
+        }
+
+        .brand {
+            text-align: left;
+        }
+
+        .brand-main {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .brand-sub {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .header-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gold-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: linear-gradient(135deg, rgba(212, 168, 83, 0.2) 0%, rgba(212, 168, 83, 0.1) 100%);
+            border: 1px solid rgba(212, 168, 83, 0.3);
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-top: 1rem;
+        }
+
+        .gold-badge svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem 2rem;
+        }
+
+        /* Input Section */
+        .input-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: -1.5rem auto 2rem;
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+        }
+
+        .input-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .input-title svg {
+            width: 16px;
+            height: 16px;
+            color: var(--gold);
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: 180px 1fr 1fr 1fr auto;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .input-wrapper input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.15);
+        }
+
+        .input-wrapper input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .btn {
+            padding: 0.8rem 1.25rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.25s;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: var(--bg-primary);
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 168, 83, 0.35);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-secondary);
+            color: var(--text-primary);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 0 0.25rem;
+        }
+
+        .stats-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .stats-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .member-count {
+            background: rgba(212, 168, 83, 0.15);
+            border: 1px solid rgba(212, 168, 83, 0.25);
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .view-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .view-btn:hover, .view-btn.active {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(212, 168, 83, 0.1);
+        }
+
+        .view-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Profile Grid */
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .profiles-grid.list-view {
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+
+        /* Profile Card - Grid View */
+        .profile-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 168, 83, 0.2);
+            background: var(--bg-card-hover);
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .profile-card:hover::before {
+            opacity: 1;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            padding: 3px;
+            position: relative;
+        }
+
+        .profile-avatar-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--bg-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            overflow: hidden;
+        }
+
+        .profile-avatar-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gold-star {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 22px;
+            height: 22px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--bg-card);
+        }
+
+        .gold-star svg {
+            width: 12px;
+            height: 12px;
+            color: var(--bg-primary);
+        }
+
+        .profile-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .profile-role {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .profile-links {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .profile-link {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s;
+            text-decoration: none;
+        }
+
+        .profile-link.linkedin {
+            background: rgba(0, 119, 181, 0.15);
+            color: var(--linkedin);
+        }
+
+        .profile-link.linkedin:hover {
+            background: var(--linkedin);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 119, 181, 0.4);
+        }
+
+        .profile-link.instagram {
+            background: rgba(228, 64, 95, 0.15);
+            color: var(--instagram);
+        }
+
+        .profile-link.instagram:hover {
+            background: var(--instagram);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(228, 64, 95, 0.4);
+        }
+
+        .profile-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-card:hover .delete-btn {
+            opacity: 1;
+        }
+
+        .delete-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .delete-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* List View */
+        .profiles-grid.list-view .profile-card {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            text-align: left;
+        }
+
+        .profiles-grid.list-view .profile-avatar {
+            width: 50px;
+            height: 50px;
+            margin: 0 1rem 0 0;
+            flex-shrink: 0;
+        }
+
+        .profiles-grid.list-view .profile-avatar-inner {
+            font-size: 1rem;
+        }
+
+        .profiles-grid.list-view .gold-star {
+            width: 18px;
+            height: 18px;
+            bottom: 0;
+            right: 0;
+        }
+
+        .profiles-grid.list-view .gold-star svg {
+            width: 10px;
+            height: 10px;
+        }
+
+        .profiles-grid.list-view .profile-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .profiles-grid.list-view .profile-name {
+            margin-bottom: 0.15rem;
+        }
+
+        .profiles-grid.list-view .profile-role {
+            margin-bottom: 0;
+        }
+
+        .profiles-grid.list-view .profile-links {
+            margin-left: auto;
+            gap: 0.5rem;
+        }
+
+        .profiles-grid.list-view .delete-btn {
+            position: relative;
+            top: auto;
+            right: auto;
+            margin-left: 0.75rem;
+            opacity: 0.5;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 5rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.5rem;
+            background: rgba(212, 168, 83, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .empty-icon svg {
+            width: 48px;
+            height: 48px;
+            color: var(--gold);
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state p {
+            font-size: 0.9rem;
+        }
+
+        /* Actions Bar */
+        .actions-bar {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .btn-icon {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .btn-danger {
+            color: #ef4444;
+            margin-left: auto;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--bg-card);
+            border: 1px solid var(--gold);
+            padding: 0.9rem 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            opacity: 0;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .toast svg {
+            width: 20px;
+            height: 20px;
+            color: var(--gold);
+        }
+
+        .toast.error {
+            border-color: #ef4444;
+        }
+
+        .toast.error svg {
+            color: #ef4444;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+            margin-top: 3rem;
+        }
+
+        .footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1.5rem 1rem 2.5rem;
+            }
+
+            .brand-main {
+                font-size: 1.25rem;
+            }
+
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profiles-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-bar {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .view-toggle {
+                display: none;
+            }
+
+            .actions-bar {
+                flex-direction: column;
+            }
+
+            .btn-danger {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profiles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-card {
+                display: flex;
+                align-items: center;
+                padding: 1rem;
+                text-align: left;
+            }
+
+            .profile-avatar {
+                width: 55px;
+                height: 55px;
+                margin: 0 1rem 0 0;
+            }
+
+            .profile-avatar-inner {
+                font-size: 1.1rem;
+            }
+
+            .profile-info {
+                flex: 1;
+                min-width: 0;
+            }
+
+            .profile-name {
+                margin-bottom: 0.15rem;
+            }
+
+            .profile-role {
+                margin-bottom: 0;
+            }
+
+            .profile-links {
+                margin-left: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-section">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                    <path d="M2 17l10 5 10-5"/>
+                    <path d="M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <div class="brand">
+                <div class="brand-main">BIM Conectados</div>
+                <div class="brand-sub">Conexão BIM</div>
+            </div>
+        </div>
+        <p class="header-description">Diretório exclusivo de membros para networking rápido</p>
+        <span class="gold-badge">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+            Membros Ouro
+        </span>
+    </header>
+
+    <div class="container">
+        <section class="input-section">
+            <div class="input-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="8.5" cy="7" r="4"/>
+                    <line x1="20" y1="8" x2="20" y2="14"/>
+                    <line x1="23" y1="11" x2="17" y2="11"/>
+                </svg>
+                Adicionar novo membro
+            </div>
+            <div class="input-grid">
+                <div class="input-wrapper">
+                    <input type="text" id="profileName" placeholder="Nome completo">
+                </div>
+                <div class="input-wrapper">
+                    <input type="text" id="linkedinUrl" placeholder="Link do LinkedIn">
+                </div>
+                <div class="input-wrapper">
+                    <input type="text" id="instagramUrl" placeholder="Link do Instagram">
+                </div>
+                <div class="input-wrapper">
+                    <input type="text" id="profilePhotoUrl" placeholder="URL da foto (opcional)">
+                </div>
+                <button class="btn btn-primary" onclick="addProfile()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                    </svg>
+                    Adicionar
+                </button>
+            </div>
+        </section>
+
+        <section class="profiles-section">
+            <div class="stats-bar">
+                <div class="stats-left">
+                    <h2 class="stats-title">Membros</h2>
+                    <span class="member-count" id="profileCount">0 conectados</span>
+                </div>
+                <div class="view-toggle">
+                    <button class="view-btn active" id="gridViewBtn" onclick="setView('grid')" title="Grade">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"/>
+                            <rect x="14" y="3" width="7" height="7"/>
+                            <rect x="3" y="14" width="7" height="7"/>
+                            <rect x="14" y="14" width="7" height="7"/>
+                        </svg>
+                    </button>
+                    <button class="view-btn" id="listViewBtn" onclick="setView('list')" title="Lista">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="8" y1="6" x2="21" y2="6"/>
+                            <line x1="8" y1="12" x2="21" y2="12"/>
+                            <line x1="8" y1="18" x2="21" y2="18"/>
+                            <line x1="3" y1="6" x2="3.01" y2="6"/>
+                            <line x1="3" y1="12" x2="3.01" y2="12"/>
+                            <line x1="3" y1="18" x2="3.01" y2="18"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="profiles-grid" id="profilesGrid"></div>
+
+            <div class="empty-state" id="emptyState">
+                <div class="empty-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <h3>Nenhum membro cadastrado</h3>
+                <p>Adicione o primeiro membro BIM Conectado Ouro</p>
+            </div>
+
+            <div class="actions-bar" id="actionsBar" style="display: none;">
+                <button class="btn btn-secondary btn-icon" onclick="exportProfiles()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    Exportar JSON
+                </button>
+                <button class="btn btn-secondary btn-icon" onclick="importProfiles()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="17 8 12 3 7 8"/>
+                        <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                    Importar JSON
+                </button>
+                <button class="btn btn-secondary btn-icon btn-danger" onclick="clearAllProfiles()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"/>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                    </svg>
+                    Limpar Tudo
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>Diretório de membros <strong>BIM Conectados Ouro</strong> · <a href="https://conexaobim.com.br" target="_blank">Conexão BIM</a></p>
+    </footer>
+
+    <div class="toast" id="toast">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+        <span id="toastMessage">Membro adicionado!</span>
+    </div>
+
+    <input type="file" id="importFile" accept=".json" style="display: none;" onchange="handleImport(event)">
+
+    <!-- Firebase App (modular CDN) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <!-- Firebase config será injetado pelo Vercel durante o build -->
+    <script>
+        // FIREBASE_CONFIG_PLACEHOLDER - será substituído durante o build
+        const firebaseConfig = {
+            apiKey: "__FIREBASE_API_KEY__",
+            authDomain: "__FIREBASE_AUTH_DOMAIN__",
+            databaseURL: "__FIREBASE_DATABASE_URL__",
+            projectId: "__FIREBASE_PROJECT_ID__",
+            storageBucket: "__FIREBASE_STORAGE_BUCKET__",
+            messagingSenderId: "__FIREBASE_MESSAGING_SENDER_ID__",
+            appId: "__FIREBASE_APP_ID__",
+            measurementId: "__FIREBASE_MEASUREMENT_ID__"
+        };
+
+        if (typeof firebaseConfig.apiKey === 'undefined' || firebaseConfig.apiKey === '__FIREBASE_API_KEY__') {
+            alert('Firebase não configurado. Configure as variáveis de ambiente no Vercel.');
+        } else {
+            firebase.initializeApp(firebaseConfig);
+        }
+    </script>
+
+        let profiles = [];
+        let currentView = localStorage.getItem('bimConectadosView') || 'grid';
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Carrega perfis do Firebase
+            db.ref('profiles').on('value', (snapshot) => {
+                const data = snapshot.val();
+                profiles = data ? Object.values(data).sort((a, b) => b.id - a.id) : [];
+                renderProfiles();
+            });
+            setView(currentView);
+            document.querySelectorAll('input').forEach(input => {
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') addProfile();
+                });
+            });
+        });
+
+
+        // Salva um perfil individual no Firebase
+        function saveProfileToFirebase(profile) {
+            db.ref('profiles/' + profile.id).set(profile);
+        }
+
+        // Remove um perfil do Firebase
+        function deleteProfileFromFirebase(id) {
+            db.ref('profiles/' + id).remove();
+        }
+
+        // Limpa todos os perfis do Firebase
+        function clearAllProfilesFromFirebase() {
+            db.ref('profiles').remove();
+        }
+
+        function setView(view) {
+            currentView = view;
+            localStorage.setItem('bimConectadosView', view);
+            const grid = document.getElementById('profilesGrid');
+            const gridBtn = document.getElementById('gridViewBtn');
+            const listBtn = document.getElementById('listViewBtn');
+
+            if (view === 'list') {
+                grid.classList.add('list-view');
+                gridBtn.classList.remove('active');
+                listBtn.classList.add('active');
+            } else {
+                grid.classList.remove('list-view');
+                gridBtn.classList.add('active');
+                listBtn.classList.remove('active');
+            }
+            renderProfiles();
+        }
+
+
+        function addProfile() {
+            const name = document.getElementById('profileName').value.trim();
+            const linkedin = document.getElementById('linkedinUrl').value.trim();
+            const instagram = document.getElementById('instagramUrl').value.trim();
+            const photoUrl = document.getElementById('profilePhotoUrl').value.trim();
+
+            if (!name) {
+                showToast('Digite o nome do membro', true);
+                return;
+            }
+            if (!linkedin && !instagram) {
+                showToast('Adicione pelo menos um link de rede social', true);
+                return;
+            }
+            if (linkedin && !isValidLinkedIn(linkedin)) {
+                showToast('Link do LinkedIn inválido', true);
+                return;
+            }
+            if (instagram && !isValidInstagram(instagram)) {
+                showToast('Link do Instagram inválido', true);
+                return;
+            }
+
+            const profile = {
+                id: Date.now(),
+                name: name,
+                linkedin: linkedin || null,
+                instagram: instagram || null,
+                photoUrl: photoUrl || null
+            };
+            saveProfileToFirebase(profile);
+
+            document.getElementById('profileName').value = '';
+            document.getElementById('linkedinUrl').value = '';
+            document.getElementById('instagramUrl').value = '';
+            document.getElementById('profilePhotoUrl').value = '';
+            document.getElementById('profileName').focus();
+            showToast('Membro adicionado com sucesso!');
+        }
+
+        function isValidLinkedIn(url) {
+            return url.includes('linkedin.com/in/') || url.includes('linkedin.com/company/');
+        }
+
+        function isValidInstagram(url) {
+            return url.includes('instagram.com/');
+        }
+
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
+        }
+
+
+        function deleteProfile(id) {
+            deleteProfileFromFirebase(id);
+            showToast('Membro removido');
+        }
+
+        function renderProfiles() {
+            const grid = document.getElementById('profilesGrid');
+            const emptyState = document.getElementById('emptyState');
+            const actionsBar = document.getElementById('actionsBar');
+            const countEl = document.getElementById('profileCount');
+
+            countEl.textContent = `${profiles.length} conectado${profiles.length !== 1 ? 's' : ''}`;
+
+            if (profiles.length === 0) {
+                grid.innerHTML = '';
+                emptyState.style.display = 'block';
+                actionsBar.style.display = 'none';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            actionsBar.style.display = 'flex';
+
+            if (currentView === 'list') {
+                grid.innerHTML = profiles.map(profile => `
+                    <div class="profile-card">
+                        <div class="profile-avatar">
+                            ${profile.photoUrl ? 
+                                `<div class="profile-avatar-inner"><img src="${profile.photoUrl}" alt="${profile.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='${getInitials(profile.name)}'"></div>` :
+                                `<div class="profile-avatar-inner">${getInitials(profile.name)}</div>`
+                            }
+                            <div class="gold-star">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="profile-info">
+                            <div class="profile-name" title="${profile.name}">${profile.name}</div>
+                            <div class="profile-role">Membro Ouro</div>
+                        </div>
+                        <div class="profile-links">
+                            ${profile.linkedin ? `
+                                <a href="${profile.linkedin}" target="_blank" class="profile-link linkedin" title="Conectar no LinkedIn">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                    </svg>
+                                </a>
+                            ` : ''}
+                            ${profile.instagram ? `
+                                <a href="${profile.instagram}" target="_blank" class="profile-link instagram" title="Seguir no Instagram">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                    </svg>
+                                </a>
+                            ` : ''}
+                        </div>
+                        <button class="delete-btn" onclick="deleteProfile(${profile.id})" title="Remover">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                        </button>
+                    </div>
+                `).join('');
+            } else {
+                grid.innerHTML = profiles.map(profile => `
+                    <div class="profile-card">
+                        <button class="delete-btn" onclick="deleteProfile(${profile.id})" title="Remover">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                        </button>
+                        <div class="profile-avatar">
+                            ${profile.photoUrl ? 
+                                `<div class="profile-avatar-inner"><img src="${profile.photoUrl}" alt="${profile.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='${getInitials(profile.name)}'"></div>` :
+                                `<div class="profile-avatar-inner">${getInitials(profile.name)}</div>`
+                            }
+                            <div class="gold-star">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="profile-name" title="${profile.name}">${profile.name}</div>
+                        <div class="profile-role">Membro Ouro</div>
+                        <div class="profile-links">
+                            ${profile.linkedin ? `
+                                <a href="${profile.linkedin}" target="_blank" class="profile-link linkedin" title="Conectar no LinkedIn">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                    </svg>
+                                </a>
+                            ` : ''}
+                            ${profile.instagram ? `
+                                <a href="${profile.instagram}" target="_blank" class="profile-link instagram" title="Seguir no Instagram">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                    </svg>
+                                </a>
+                            ` : ''}
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = message;
+            
+            if (isError) {
+                toast.classList.add('error');
+            } else {
+                toast.classList.remove('error');
+            }
+            
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+
+        function exportProfiles() {
+            // Exporta a lista atual (já sincronizada do Firebase)
+            const dataStr = JSON.stringify(profiles, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'bim-conectados-ouro.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('Lista exportada com sucesso!');
+        }
+
+        function importProfiles() {
+            document.getElementById('importFile').click();
+        }
+
+
+        function handleImport(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (Array.isArray(imported)) {
+                        imported.forEach(profile => {
+                            if (profile && profile.id && profile.name) {
+                                saveProfileToFirebase(profile);
+                            }
+                        });
+                        showToast(`${imported.length} membros importados!`);
+                    }
+                } catch (err) {
+                    showToast('Erro ao importar arquivo', true);
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
+
+        function clearAllProfiles() {
+            if (confirm('Tem certeza que deseja remover todos os membros?')) {
+                clearAllProfilesFromFirebase();
+                showToast('Todos os membros removidos');
+            }
+        }
+    </script>
+</body>
+</html>
