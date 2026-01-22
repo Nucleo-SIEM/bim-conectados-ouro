@@ -47,24 +47,34 @@ O sistema é 100% web, sem backend próprio. O banco de dados é fornecido gratu
 
 ### ⚠️ Importante: Firebase Config
 
-Antes do deploy, certifique-se de que:
+**NÃO HÁ INFORMAÇÕES SENSÍVEIS NO GITHUB** ✅
 
-1. O arquivo `firebaseConfig.js` está na pasta `bim-conectados-ouro/`
-2. O arquivo `firebaseConfig.js` **NÃO está no GitHub** (verificado pelo `.gitignore`)
-3. Após o deploy, teste se o Firebase está funcionando
+As credenciais do Firebase devem ser configuradas **diretamente no Vercel**, não no código.
 
-### 🔧 Configuração do Firebase no Vercel
+#### Como configurar no Vercel:
 
-Como este projeto usa HTML puro, as variáveis de ambiente não são necessárias. Mas se você migrar para Next.js no futuro, configure estas variáveis em **Settings > Environment Variables**:
+1. **Após conectar o repositório no Vercel**, vá para **Settings > Environment Variables**
+2. **Adicione estas variáveis** (use os valores reais do seu Firebase):
 
-- `NEXT_PUBLIC_FIREBASE_API_KEY`
-- `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`
-- `NEXT_PUBLIC_FIREBASE_DATABASE_URL`
-- `NEXT_PUBLIC_FIREBASE_PROJECT_ID`
-- `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET`
-- `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID`
-- `NEXT_PUBLIC_FIREBASE_APP_ID`
-- `NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID`
+```
+FIREBASE_API_KEY = AIzaSyBEmQ1QbWiE_ikIGg66vaw7Sev6QLmb2-E
+FIREBASE_AUTH_DOMAIN = bim-conectados-ouro.firebaseapp.com
+FIREBASE_DATABASE_URL = https://bim-conectados-ouro-default-rtdb.firebaseio.com
+FIREBASE_PROJECT_ID = bim-conectados-ouro
+FIREBASE_STORAGE_BUCKET = bim-conectados-ouro.firebasestorage.app
+FIREBASE_MESSAGING_SENDER_ID = 1079293409808
+FIREBASE_APP_ID = 1:1079293409808:web:f3aae3e70c6c90f8d2a895
+FIREBASE_MEASUREMENT_ID = G-54HSRFZGBG
+```
+
+3. **No Vercel, clique em "Redeploy"** para aplicar as variáveis
+4. **Teste o site** - o Firebase deve funcionar normalmente
+
+#### Para desenvolvimento local:
+
+- O arquivo `firebaseConfig.js` tem placeholders
+- Para testar localmente, substitua os valores pelos reais temporariamente
+- **Nunca commite** as credenciais reais!
 
 ### Netlify (Alternativa)
 
