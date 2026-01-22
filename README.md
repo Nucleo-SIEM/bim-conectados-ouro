@@ -28,8 +28,28 @@ Você pode publicar este diretório em qualquer serviço de hospedagem estática
 2. Clique em "Add new site" > "Import an existing project" ou arraste a pasta com o HTML.
 3. O site será publicado e você receberá um link público.
 
-## Banco de dados
-O projeto já está configurado para usar o Firebase. Se quiser usar outro banco, basta adaptar o código JS.
+
+## Banco de dados e segurança
+Para proteger suas chaves, **NÃO suba sua configuração do Firebase para o GitHub**.
+
+1. Crie um arquivo chamado `firebaseConfig.js` na mesma pasta do HTML.
+2. Cole sua configuração do Firebase nele, assim:
+	 ```js
+	 // firebaseConfig.js
+	 const firebaseConfig = {
+		 apiKey: "SUA_API_KEY",
+		 authDomain: "SEU_DOMINIO.firebaseapp.com",
+		 databaseURL: "https://SEU_DOMINIO.firebaseio.com",
+		 projectId: "SEU_PROJECT_ID",
+		 storageBucket: "SEU_BUCKET.appspot.com",
+		 messagingSenderId: "SEU_SENDER_ID",
+		 appId: "SEU_APP_ID",
+		 measurementId: "SEU_MEASUREMENT_ID"
+	 };
+	 ```
+3. Adicione `firebaseConfig.js` ao seu `.gitignore` para garantir que nunca será enviado ao repositório público.
+
+O arquivo HTML já está pronto para carregar essa configuração de forma segura.
 
 ---
 Desenvolvido por Conexão BIM
